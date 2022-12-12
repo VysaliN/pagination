@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Pagination = ({ data, pageHandler }) => {
+  const [isActive, setIsActive] = useState(false);
+  const handleClick =()=>{
+    setIsActive((page)=>page);
+  }
   const pageNumbers = [];
   for (let i = 1; i < Math.ceil(data.length / 10) + 1; i++) {
     pageNumbers.push(i);
@@ -9,9 +13,16 @@ const Pagination = ({ data, pageHandler }) => {
     <div className="numbers">
       <center>
         {pageNumbers.map((page) => (
-          <div className="btn" onClick={() => pageHandler(page)}>
+          <button
+            
+            className="btn"
+            onClick={() => {
+              pageHandler(page);
+              handleClick();
+            }}
+          >
             {page}
-          </div>
+          </button>
         ))}
       </center>
     </div>
